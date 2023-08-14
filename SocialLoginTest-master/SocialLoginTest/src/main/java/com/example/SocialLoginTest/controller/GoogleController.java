@@ -51,14 +51,14 @@ public class GoogleController {
         // HTTP 통신을 위해 RestTemplate 활용
         RestTemplate restTemplate = new RestTemplate();
         GoogleLoginResponse requestparam = GoogleLoginResponse.builder()
-                //.accessToken(googleLoginResponse.getAccessToken())
+                .accessToken(googleLoginResponse.getAccessToken())
                 /*
                 .scope(googleLoginResponse.getScope())
                 .expiresIn(googleLoginResponse.getExpiresIn())
                 //.refreshToken(googleLoginResponse.getRefreshToken())
                 .tokenType(googleLoginResponse.getTokenType())
                  */
-                .idToken(googleLoginResponse.getIdToken())
+                //.idToken(googleLoginResponse.getIdToken())
                 .build();
         /*
         GoogleLoginRequest requestParams = GoogleLoginRequest.builder()
@@ -87,7 +87,7 @@ public class GoogleController {
             GoogleLoginResponse googleLoginResponse = objectMapper.readValue(apiResponseJson.getBody(), new TypeReference<GoogleLoginResponse>() {});
 */
             // 사용자의 정보는 JWT Token으로 저장되어 있고, Id_Token에 값을 저장한다.
-            String jwtToken = googleLoginResponse.getIdToken();
+            String jwtToken = googleLoginResponse.getAccessToken();
 
             // JWT Token을 전달해 JWT 저장된 사용자 정보 확인
             String requestUrl = UriComponentsBuilder.fromHttpUrl(configUtils.getGoogleAuthUrl() + "/tokeninfo").queryParam("id_token", jwtToken).toUriString();
