@@ -58,7 +58,7 @@ public class GoogleController {
                 //.refreshToken(googleLoginResponse.getRefreshToken())
                 .tokenType(googleLoginResponse.getTokenType())
                  */
-                //.idToken(googleLoginResponse.getIdToken())
+                .idToken(googleLoginResponse.getIdToken())
                 .build();
         /*
         GoogleLoginRequest requestParams = GoogleLoginRequest.builder()
@@ -87,17 +87,11 @@ public class GoogleController {
             GoogleLoginResponse googleLoginResponse = objectMapper.readValue(apiResponseJson.getBody(), new TypeReference<GoogleLoginResponse>() {});
 */
             // 사용자의 정보는 JWT Token으로 저장되어 있고, Id_Token에 값을 저장한다.
-            String jwtToken = googleLoginResponse.getAccessToken();
+            String jwtToken = googleLoginResponse.getIdToken();
             log.info("sucess");
-            log.info("token:{}",jwtToken);
-            return ResponseEntity.ok().body(null);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ResponseEntity.badRequest().body(null);
-    }
-/*
+            log.info("idtoken:{}",jwtToken);
+            log.info("accessToken:{}",googleLoginResponse.getAccessToken());
+
             // JWT Token을 전달해 JWT 저장된 사용자 정보 확인
             String requestUrl = UriComponentsBuilder.fromHttpUrl(configUtils.getGoogleAuthUrl() + "/tokeninfo").queryParam("id_token", jwtToken).toUriString();
 
@@ -126,5 +120,5 @@ public class GoogleController {
         return ResponseEntity.badRequest().body(null);
     }
 
- */
+
 }
