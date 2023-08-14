@@ -88,7 +88,10 @@ public class GoogleController {
 */
             // 사용자의 정보는 JWT Token으로 저장되어 있고, Id_Token에 값을 저장한다.
             String jwtToken = googleLoginResponse.getAccessToken();
-
+            log.info("sucess");
+            log.info("token:{}",jwtToken);
+            return ResponseEntity.ok().body();
+/*
             // JWT Token을 전달해 JWT 저장된 사용자 정보 확인
             String requestUrl = UriComponentsBuilder.fromHttpUrl(configUtils.getGoogleAuthUrl() + "/tokeninfo").queryParam("id_token", jwtToken).toUriString();
 
@@ -116,4 +119,6 @@ public class GoogleController {
 
         return ResponseEntity.badRequest().body(null);
     }
+
+ */
 }
