@@ -91,6 +91,10 @@ public class GoogleController {
             log.info("sucess");
             log.info("token:{}",jwtToken);
             return ResponseEntity.ok().body();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 /*
             // JWT Token을 전달해 JWT 저장된 사용자 정보 확인
             String requestUrl = UriComponentsBuilder.fromHttpUrl(configUtils.getGoogleAuthUrl() + "/tokeninfo").queryParam("id_token", jwtToken).toUriString();
