@@ -90,7 +90,7 @@ public class GoogleController {
             String jwtToken = googleLoginResponse.getAccessToken();
             log.info("sucess");
             log.info("token:{}",jwtToken);
-            return ResponseEntity.ok().body();
+            return ResponseEntity.ok().body(null);
         }
         catch (Exception e) {
             e.printStackTrace();
